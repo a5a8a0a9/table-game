@@ -57,3 +57,25 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Styling
+
+This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+- **Tailwind Config**: `tailwind.config.js`
+- **Global Styles**: `src/styles.scss` (includes Tailwind directives)
+
+## Deployment
+
+This project is configured to automatically deploy to **GitHub Pages** using GitHub Actions.
+
+### Continuous Deployment
+A GitHub Action workflow is set up in `.github/workflows/deploy.yml`.
+- **Trigger**: Pushes to the `main` branch.
+- **Process**: Builds the Angular application and deploys the output to the `gh-pages` branch.
+
+### One-time Setup
+1. Go to your repository **Settings**.
+2. Navigate to **Pages** (under Code and automation).
+3. Under **Build and deployment** > **Source**, select **Deploy from a branch**.
+4. Select `gh-pages` branch (this branch will be created after the first successful action run) and `/ (root)` folder.
+5. Click **Save**.
