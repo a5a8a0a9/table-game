@@ -1,0 +1,305 @@
+<!-- Header -->
+<header
+	class="w-full max-w-md text-center mb-6 mt-4 flex flex-col items-center relative"
+>
+	<h1 class="text-3xl font-bold text-blue-400 mb-2">🛡️ 阿瓦隆語音上帝</h1>
+	<p class="text-gray-400 text-sm">不准偷看，偷看的人手指會變短。</p>
+	<button
+		class="absolute right-0 top-2 text-xs bg-gray-700 hover:bg-gray-600 border border-gray-600 text-gray-300 px-3 py-1 rounded-full transition-colors flex items-center"
+		(click)="toggleRules()"
+	>
+		<span class="mr-1">📜</span> 規則
+	</button>
+</header>
+
+<!-- Main Content -->
+<main class="w-full max-w-md space-y-5">
+	<!-- Game Setup (Player Count) -->
+	<section class="bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-700">
+		<h2 class="text-lg font-bold text-gray-200 mb-3 flex items-center">
+			<span class="mr-2">👥</span> 遊戲設置
+		</h2>
+
+		<div class="space-y-4">
+			<div>
+				<div class="flex justify-between items-end mb-2">
+					<div class="text-sm text-gray-400">
+						玩家人數:
+						<span class="text-white font-bold text-2xl ml-1">{{
+							playerCount()
+						}}</span>
+						人
+					</div>
+					<div
+						class="text-sm font-bold px-2 py-1 rounded bg-gray-900 border border-gray-600"
+					>
+						<span class="text-blue-400">🔵 {{ currentConfig().good }}</span>
+						<span class="text-gray-500 mx-1">|</span>
+						<span class="text-red-400">🔴 {{ currentConfig().evil }}</span>
+					</div>
+				</div>
+				<input
+					type="range"
+					[ngModel]="playerCount()"
+					(ngModelChange)="playerCount.set($event)"
+					min="5"
+					max="10"
+					step="1"
+					class="w-full mb-1"
+				/>
+				<div class="flex justify-between text-xs text-gray-500 px-1 font-mono">
+					<span>5</span><span>6</span><span>7</span><span>8</span><span>9</span
+					><span>10</span>
+				</div>
+			</div>
+
+			<div
+				class="text-sm text-gray-300 bg-gray-900/50 p-3 rounded border border-gray-600 leading-relaxed"
+			>
+				💡 {{ currentConfig().text }}
+			</div>
+		</div>
+	</section>
+
+	<!-- Voice Settings -->
+	<section class="bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-700">
+		<h2 class="text-lg font-bold text-gray-200 mb-3 flex items-center">
+			<span class="mr-2">🗣️</span> 語音設定
+		</h2>
+
+		<div class="space-y-4">
+			<div>
+				<label class="block text-sm text-gray-400 mb-1">語速 (Speed)</label>
+				<input
+					type="range"
+					[ngModel]="rate()"
+					(ngModelChange)="rate.set($event)"
+					min="0.5"
+					max="1.5"
+					step="0.1"
+					class="w-full h-2 rounded-lg appearance-none cursor-pointer"
+				/>
+				<div class="flex justify-between text-xs text-gray-500 mt-1">
+					<span>慢</span>
+					<span>正常</span>
+					<span>快</span>
+				</div>
+			</div>
+
+			<div>
+				<label class="block text-sm text-gray-400 mb-1"
+					>語音包 (若無中文請調整系統設定)</label
+				>
+				<select
+					[ngModel]="selectedVoiceName()"
+					(ngModelChange)="selectedVoiceName.set($event)"
+					class="w-full bg-gray-700 text-white rounded p-2 text-sm border border-gray-600 focus:outline-none focus:border-blue-500"
+				>
+					@for (voice of displayVoices(); track voice.name) {
+					<option [value]="voice.name">
+						{{ voice.name }} ({{ voice.lang }})
+					</option>
+					} @empty {
+					<option value="">載入中...</option>
+					}
+				</select>
+			</div>
+		</div>
+	</section>
+
+	<!-- Role Configuration -->
+	<section class="bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-700">
+		<div class="flex justify-between items-center mb-3">
+			<h2 class="text-lg font-bold text-gray-200 flex items-center">
+				<span class="mr-2">🎭</span> 角色配置
+			</h2>
+			<span class="text-xs text-gray-500">(點擊啟用特殊角色)</span>
+		</div>
+		<div class="grid grid-cols-2 gap-3">
+			@for (role of ROLES; track role.id) {
+			<div
+				class="role-card cursor-pointer border-2 border-gray-600 bg-gray-700 rounded-lg p-3 flex flex-col items-center justify-center gap-2 select-none"
+				[class.active]="isRoleActive(role.id)"
+				(click)="toggleRole(role.id)"
+			>
+				<div class="text-3xl">{{ role.icon }}</div>
+				<div class="font-bold text-sm">{{ role.name }}</div>
+				<div class="text-xs text-gray-400 text-center">{{ role.desc }}</div>
+			</div>
+			}
+		</div>
+	</section>
+
+	<!-- Action Area -->
+	<section
+		class="fixed bottom-0 left-0 w-full bg-gray-900 p-4 border-t border-gray-800 flex flex-col gap-3 shadow-[0_-5px_15px_rgba(0,0,0,0.5)] z-40"
+	>
+		@if (currentStatus() || isPlaying()) {
+		<div
+			class="text-center text-yellow-400 font-bold text-lg min-h-[1.75rem]"
+			[class.speaking-indicator]="isSpeaking()"
+			[style.color]="isSpeaking() ? '#63b3ed' : '#ecc94b'"
+		>
+			{{ currentStatus() }}
+		</div>
+		}
+
+		<div class="flex gap-3">
+			@if (isPlaying()) {
+			<button
+				(click)="stopGame()"
+				class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+			>
+				⏹ 停止
+			</button>
+			} @else {
+			<button
+				(click)="startGame()"
+				class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded-lg transition-colors shadow-lg shadow-blue-900/50"
+			>
+				▶️ 開始天黑
+			</button>
+			}
+		</div>
+		<p class="text-center text-xs text-gray-600 pb-2">
+			請確認手機未靜音且音量已開啟
+		</p>
+	</section>
+
+	<!-- Spacer for fixed footer -->
+	<div class="h-32"></div>
+</main>
+
+<!-- Rules Modal -->
+<div
+	class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300"
+	[class.hidden]="!showRules()"
+	[class.opacity-0]="!showRules()"
+	(click)="toggleRules()"
+>
+	<div
+		class="bg-gray-800 w-full max-w-lg rounded-xl shadow-2xl border border-gray-600 max-h-[85vh] flex flex-col transform transition-transform duration-300"
+		[class.scale-95]="!showRules()"
+		(click)="$event.stopPropagation()"
+	>
+		<div
+			class="p-4 border-b border-gray-700 flex justify-between items-center bg-gray-800/50 rounded-t-xl"
+		>
+			<h3 class="text-xl font-bold text-white flex items-center">
+				<span class="mr-2">📜</span> 遊戲規則
+			</h3>
+			<button
+				(click)="toggleRules()"
+				class="text-gray-400 hover:text-white text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
+			>
+				&times;
+			</button>
+		</div>
+		<div
+			class="p-5 overflow-y-auto space-y-6 text-gray-300 text-sm leading-relaxed"
+		>
+			<!-- Distribution Table -->
+			<div>
+				<h4
+					class="text-blue-400 font-bold text-base mb-2 border-l-4 border-blue-500 pl-2"
+				>
+					陣營配置表
+				</h4>
+				<div class="grid grid-cols-3 gap-2 text-center text-xs">
+					<div class="bg-gray-700 p-2 rounded text-gray-400">人數</div>
+					<div class="bg-blue-900/40 p-2 rounded text-blue-300">
+						好人 (亞瑟忠臣)
+					</div>
+					<div class="bg-red-900/40 p-2 rounded text-red-300">
+						壞人 (莫德雷德)
+					</div>
+
+					<!-- Table content -->
+					<div class="contents font-mono">
+						<div class="bg-gray-700/50 p-1">5</div>
+						<div class="bg-blue-900/20 p-1">3</div>
+						<div class="bg-red-900/20 p-1">2</div>
+						<div class="bg-gray-700/50 p-1">6</div>
+						<div class="bg-blue-900/20 p-1">4</div>
+						<div class="bg-red-900/20 p-1">2</div>
+						<div class="bg-gray-700/50 p-1">7</div>
+						<div class="bg-blue-900/20 p-1">4</div>
+						<div class="bg-red-900/20 p-1">3</div>
+						<div class="bg-gray-700/50 p-1">8</div>
+						<div class="bg-blue-900/20 p-1">5</div>
+						<div class="bg-red-900/20 p-1">3</div>
+						<div class="bg-gray-700/50 p-1">9</div>
+						<div class="bg-blue-900/20 p-1">6</div>
+						<div class="bg-red-900/20 p-1">3</div>
+						<div class="bg-gray-700/50 p-1">10</div>
+						<div class="bg-blue-900/20 p-1">6</div>
+						<div class="bg-red-900/20 p-1">4</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Roles Info -->
+			<div>
+				<h4
+					class="text-blue-400 font-bold text-base mb-2 border-l-4 border-blue-500 pl-2"
+				>
+					角色能力速查
+				</h4>
+				<ul class="space-y-3">
+					<li class="bg-gray-700/30 p-2 rounded">
+						<div class="flex items-center gap-2 mb-1">
+							<span class="text-xl">🧙‍♂️</span>
+							<strong class="text-blue-300">梅林 (好)</strong>
+						</div>
+						<p class="text-xs text-gray-400">
+							知道壞人是誰（除了莫德雷德）。必須隱藏身分，若在遊戲結束時被刺客刺殺，好人陣營直接落敗。
+						</p>
+					</li>
+					<li class="bg-gray-700/30 p-2 rounded">
+						<div class="flex items-center gap-2 mb-1">
+							<span class="text-xl">👸</span>
+							<strong class="text-blue-300">派西維爾 (好)</strong>
+						</div>
+						<p class="text-xs text-gray-400">
+							知道誰是梅林（會看到梅林與魔甘娜，但不知道誰是真梅林）。負責保護梅林並帶領好人。
+						</p>
+					</li>
+					<li class="bg-gray-700/30 p-2 rounded">
+						<div class="flex items-center gap-2 mb-1">
+							<span class="text-xl">🧛‍♀️</span>
+							<strong class="text-red-300">魔甘娜 (壞)</strong>
+						</div>
+						<p class="text-xs text-gray-400">
+							假扮梅林。在派西維爾眼中，她與梅林一樣會舉手。
+						</p>
+					</li>
+					<li class="bg-gray-700/30 p-2 rounded">
+						<div class="flex items-center gap-2 mb-1">
+							<span class="text-xl">🦹</span>
+							<strong class="text-red-300">莫德雷德 (壞)</strong>
+						</div>
+						<p class="text-xs text-gray-400">
+							梅林看不到他。他在梅林睜眼環節時不舉手。
+						</p>
+					</li>
+					<li class="bg-gray-700/30 p-2 rounded">
+						<div class="flex items-center gap-2 mb-1">
+							<span class="text-xl">👺</span>
+							<strong class="text-red-300">奧伯倫 (壞)</strong>
+						</div>
+						<p class="text-xs text-gray-400">
+							邊緣人。壞人看不到他，他也看不到壞人。但在梅林眼中他是壞人。
+						</p>
+					</li>
+				</ul>
+			</div>
+
+			<div class="text-xs text-gray-500 pt-2 border-t border-gray-700">
+				<p>
+					💡
+					小提示：此工具僅輔助「天黑請閉眼」階段的語音主持，遊戲過程中的發言與投票請依據實體桌遊規則進行。
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
