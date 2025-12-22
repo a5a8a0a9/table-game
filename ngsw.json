@@ -1,7 +1,7 @@
 {
   "configVersion": 1,
-  "timestamp": 1766416142932,
-  "index": "/table-game/index.html",
+  "timestamp": 1766420676922,
+  "index": "/index.html",
   "assetGroups": [
     {
       "name": "app",
@@ -11,11 +11,11 @@
         "ignoreVary": true
       },
       "urls": [
-        "/table-game/favicon.ico",
-        "/table-game/index.html",
-        "/table-game/main-RB4WRACA.js",
-        "/table-game/manifest.webmanifest",
-        "/table-game/styles-QSYCBVSQ.css"
+        "/favicon.ico",
+        "/index.html",
+        "/main-RB4WRACA.js",
+        "/manifest.webmanifest",
+        "/styles-QSYCBVSQ.css"
       ],
       "patterns": []
     },
@@ -27,21 +27,21 @@
         "ignoreVary": true
       },
       "urls": [
-        "/table-game/assets/icons/manifest-icon-192.maskable.png",
-        "/table-game/assets/icons/manifest-icon-512.maskable.png"
+        "/assets/icons/manifest-icon-192.maskable.png",
+        "/assets/icons/manifest-icon-512.maskable.png"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "/table-game/assets/icons/manifest-icon-192.maskable.png": "f7b127cb3fe8e1c47a3cb831cb41dd86cf986fb4",
-    "/table-game/assets/icons/manifest-icon-512.maskable.png": "00ed2881be29a4cdebdc2a09f6cb87994d4d2150",
-    "/table-game/favicon.ico": "ec9539f889b3c6e39ab40914fe765c29f9db01d3",
-    "/table-game/index.html": "7a3aada62b6b6f51bab8dc19fc5475a5717c3642",
-    "/table-game/main-RB4WRACA.js": "c23d0acd6ac9ad1e492672be08e9715f876976e3",
-    "/table-game/manifest.webmanifest": "44f09cfcc2535e57baf3378d3d40c6896b2c9955",
-    "/table-game/styles-QSYCBVSQ.css": "dbb0a890c31ea6acde012f3ac54c1c3f141bc50d"
+    "/assets/icons/manifest-icon-192.maskable.png": "f7b127cb3fe8e1c47a3cb831cb41dd86cf986fb4",
+    "/assets/icons/manifest-icon-512.maskable.png": "00ed2881be29a4cdebdc2a09f6cb87994d4d2150",
+    "/favicon.ico": "ec9539f889b3c6e39ab40914fe765c29f9db01d3",
+    "/index.html": "63290cf38c151281694634ba920144fee92ca049",
+    "/main-RB4WRACA.js": "c23d0acd6ac9ad1e492672be08e9715f876976e3",
+    "/manifest.webmanifest": "44f09cfcc2535e57baf3378d3d40c6896b2c9955",
+    "/styles-QSYCBVSQ.css": "dbb0a890c31ea6acde012f3ac54c1c3f141bc50d"
   },
   "navigationUrls": [
     {
