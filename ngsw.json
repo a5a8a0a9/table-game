@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1766334124140,
+  "timestamp": 1766416142932,
   "index": "/table-game/index.html",
   "assetGroups": [
     {
@@ -13,9 +13,9 @@
       "urls": [
         "/table-game/favicon.ico",
         "/table-game/index.html",
-        "/table-game/main-QX2QGLSN.js",
+        "/table-game/main-RB4WRACA.js",
         "/table-game/manifest.webmanifest",
-        "/table-game/styles-JNCQFBER.css"
+        "/table-game/styles-QSYCBVSQ.css"
       ],
       "patterns": []
     },
@@ -27,33 +27,21 @@
         "ignoreVary": true
       },
       "urls": [
-        "/table-game/assets/icons/icon-128x128.png",
-        "/table-game/assets/icons/icon-144x144.png",
-        "/table-game/assets/icons/icon-152x152.png",
-        "/table-game/assets/icons/icon-192x192.png",
-        "/table-game/assets/icons/icon-384x384.png",
-        "/table-game/assets/icons/icon-512x512.png",
-        "/table-game/assets/icons/icon-72x72.png",
-        "/table-game/assets/icons/icon-96x96.png"
+        "/table-game/assets/icons/manifest-icon-192.maskable.png",
+        "/table-game/assets/icons/manifest-icon-512.maskable.png"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "/table-game/assets/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
-    "/table-game/assets/icons/icon-144x144.png": "a9b8d25f6ee537e9b90a6b70777b101a855fcc86",
-    "/table-game/assets/icons/icon-152x152.png": "82ca30899b11e7de09ee6c8bfa2e24638021eb35",
-    "/table-game/assets/icons/icon-192x192.png": "ef4e2bc80be00a85825cc2910e34999795ae3294",
-    "/table-game/assets/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
-    "/table-game/assets/icons/icon-512x512.png": "57f6b379bd506be1a087304444a840bcdbd69c1c",
-    "/table-game/assets/icons/icon-72x72.png": "56931b5ba75b1ba478ccca588586e2891ea774e9",
-    "/table-game/assets/icons/icon-96x96.png": "c5cf62a0fb554b62673e90546b567a0d7e6134ba",
+    "/table-game/assets/icons/manifest-icon-192.maskable.png": "f7b127cb3fe8e1c47a3cb831cb41dd86cf986fb4",
+    "/table-game/assets/icons/manifest-icon-512.maskable.png": "00ed2881be29a4cdebdc2a09f6cb87994d4d2150",
     "/table-game/favicon.ico": "ec9539f889b3c6e39ab40914fe765c29f9db01d3",
-    "/table-game/index.html": "ee7f8c39bc59a45f8c1aad3892bd567acfd4c773",
-    "/table-game/main-QX2QGLSN.js": "e535c3f9c19638804621d303b24a8ae8097c3ba6",
-    "/table-game/manifest.webmanifest": "5094dbf35aa41224a96a316f4946a9b9efd2ec4e",
-    "/table-game/styles-JNCQFBER.css": "164ac27d13e9dfbcbce25a8cdbb4ad7dfe2b1b7e"
+    "/table-game/index.html": "7a3aada62b6b6f51bab8dc19fc5475a5717c3642",
+    "/table-game/main-RB4WRACA.js": "c23d0acd6ac9ad1e492672be08e9715f876976e3",
+    "/table-game/manifest.webmanifest": "44f09cfcc2535e57baf3378d3d40c6896b2c9955",
+    "/table-game/styles-QSYCBVSQ.css": "dbb0a890c31ea6acde012f3ac54c1c3f141bc50d"
   },
   "navigationUrls": [
     {
