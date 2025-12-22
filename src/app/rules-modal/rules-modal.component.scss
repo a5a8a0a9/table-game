@@ -1,0 +1,43 @@
+/* Scrollbar for modal */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: #2d3748;
+}
+::-webkit-scrollbar-thumb {
+	background: #4a5568;
+	border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #718096;
+}
+
+dialog {
+	max-width: 100%;
+	max-height: 100vh;
+	margin: auto;
+	border: none;
+	background: transparent;
+	padding: 0;
+
+	&::backdrop {
+		background: rgba(0, 0, 0, 0.8);
+		backdrop-filter: blur(4px);
+	}
+
+	&[open] {
+		animation: fade-in 0.3s ease-out;
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}

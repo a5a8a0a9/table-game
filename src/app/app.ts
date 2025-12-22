@@ -6,9 +6,11 @@ import {
 	inject,
 	OnInit,
 	signal,
+	ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NarratorService } from './narrator.service';
+import { RulesModalComponent } from './rules-modal/rules-modal.component';
 
 interface Role {
 	id: string;
@@ -26,7 +28,7 @@ interface ConfigRule {
 @Component({
 	selector: 'yo-root',
 	standalone: true,
-	imports: [CommonModule, FormsModule],
+	imports: [CommonModule, FormsModule, RulesModalComponent],
 	templateUrl: './app.html',
 	styleUrls: ['./app.scss'],
 })
@@ -69,12 +71,13 @@ export class App implements OnInit {
 	// State Signals
 	playerCount = signal(5);
 	roles = signal<Set<string>>(new Set(['merlin']));
-	rate = signal(0.9);
+	rate = signal(1);
 	selectedVoiceName = signal('');
 	isPlaying = signal(false);
 	currentStatus = signal('');
 	isSpeaking = signal(false);
-	showRules = signal(false);
+
+	@ViewChild('rulesModal') rulesModal!: RulesModalComponent;
 
 	// Computed
 	currentConfig = computed(() => this.CONFIG_RULES[this.playerCount()]);
@@ -93,7 +96,7 @@ export class App implements OnInit {
 		return zh.length > 0 ? zh : all;
 	});
 
-	ngOnInit() {
+	constructor() {
 		// Attempt to select a default voice
 		effect(() => {
 			const voices = this.displayVoices();
@@ -107,6 +110,8 @@ export class App implements OnInit {
 			}
 		});
 	}
+
+	ngOnInit() {}
 
 	toggleRole(id: string) {
 		this.roles.update((current) => {
@@ -125,7 +130,7 @@ export class App implements OnInit {
 	}
 
 	toggleRules() {
-		this.showRules.update((v) => !v);
+		this.rulesModal.open();
 	}
 
 	async startGame() {
