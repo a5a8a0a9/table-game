@@ -1,0 +1,130 @@
+<dialog
+	#dialog
+	class="rounded-xl shadow-2xl overflow-hidden"
+	(click)="onBackdropClick($event)"
+>
+	<div
+		class="bg-gray-800 w-full max-w-lg border border-gray-600 max-h-[85vh] flex flex-col"
+		(click)="$event.stopPropagation()"
+	>
+		<div
+			class="p-4 border-b border-gray-700 flex justify-between items-center bg-gray-800/50 rounded-t-xl"
+		>
+			<h3 class="text-xl font-bold text-white flex items-center">
+				<span class="mr-2">📜</span> 遊戲規則
+			</h3>
+			<button
+				(click)="close()"
+				class="text-gray-400 hover:text-white text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
+			>
+				&times;
+			</button>
+		</div>
+		<div
+			class="p-5 overflow-y-auto space-y-6 text-gray-300 text-sm leading-relaxed"
+		>
+			<!-- Distribution Table -->
+			<div>
+				<h4
+					class="text-blue-400 font-bold text-base mb-2 border-l-4 border-blue-500 pl-2"
+				>
+					陣營配置表
+				</h4>
+				<div class="grid grid-cols-3 gap-2 text-center text-xs">
+					<div class="bg-gray-700 p-2 rounded text-gray-400">人數</div>
+					<div class="bg-blue-900/40 p-2 rounded text-blue-300">
+						好人 (亞瑟忠臣)
+					</div>
+					<div class="bg-red-900/40 p-2 rounded text-red-300">
+						壞人 (莫德雷德)
+					</div>
+
+					<!-- Table content -->
+					<div class="contents font-mono">
+						<div class="bg-gray-700/50 p-1">5</div>
+						<div class="bg-blue-900/20 p-1">3</div>
+						<div class="bg-red-900/20 p-1">2</div>
+						<div class="bg-gray-700/50 p-1">6</div>
+						<div class="bg-blue-900/20 p-1">4</div>
+						<div class="bg-red-900/20 p-1">2</div>
+						<div class="bg-gray-700/50 p-1">7</div>
+						<div class="bg-blue-900/20 p-1">4</div>
+						<div class="bg-red-900/20 p-1">3</div>
+						<div class="bg-gray-700/50 p-1">8</div>
+						<div class="bg-blue-900/20 p-1">5</div>
+						<div class="bg-red-900/20 p-1">3</div>
+						<div class="bg-gray-700/50 p-1">9</div>
+						<div class="bg-blue-900/20 p-1">6</div>
+						<div class="bg-red-900/20 p-1">3</div>
+						<div class="bg-gray-700/50 p-1">10</div>
+						<div class="bg-blue-900/20 p-1">6</div>
+						<div class="bg-red-900/20 p-1">4</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Roles Info -->
+			<div>
+				<h4
+					class="text-blue-400 font-bold text-base mb-2 border-l-4 border-blue-500 pl-2"
+				>
+					角色能力速查
+				</h4>
+				<ul class="space-y-3">
+					<li class="bg-gray-700/30 p-2 rounded">
+						<div class="flex items-center gap-2 mb-1">
+							<span class="text-xl">🧙‍♂️</span>
+							<strong class="text-blue-300">梅林 (好)</strong>
+						</div>
+						<p class="text-xs text-gray-400">
+							知道壞人是誰（除了莫德雷德）。必須隱藏身分，若在遊戲結束時被刺客刺殺，好人陣營直接落敗。
+						</p>
+					</li>
+					<li class="bg-gray-700/30 p-2 rounded">
+						<div class="flex items-center gap-2 mb-1">
+							<span class="text-xl">👸</span>
+							<strong class="text-blue-300">派西維爾 (好)</strong>
+						</div>
+						<p class="text-xs text-gray-400">
+							知道誰是梅林（會看到梅林與魔甘娜，但不知道誰是真梅林）。負責保護梅林並帶領好人。
+						</p>
+					</li>
+					<li class="bg-gray-700/30 p-2 rounded">
+						<div class="flex items-center gap-2 mb-1">
+							<span class="text-xl">🧛‍♀️</span>
+							<strong class="text-red-300">魔甘娜 (壞)</strong>
+						</div>
+						<p class="text-xs text-gray-400">
+							假扮梅林。在派西維爾眼中，她與梅林一樣會舉手。
+						</p>
+					</li>
+					<li class="bg-gray-700/30 p-2 rounded">
+						<div class="flex items-center gap-2 mb-1">
+							<span class="text-xl">🦹</span>
+							<strong class="text-red-300">莫德雷德 (壞)</strong>
+						</div>
+						<p class="text-xs text-gray-400">
+							梅林看不到他。他在梅林睜眼環節時不舉手。
+						</p>
+					</li>
+					<li class="bg-gray-700/30 p-2 rounded">
+						<div class="flex items-center gap-2 mb-1">
+							<span class="text-xl">👺</span>
+							<strong class="text-red-300">奧伯倫 (壞)</strong>
+						</div>
+						<p class="text-xs text-gray-400">
+							邊緣人。壞人看不到他，他也看不到壞人。但在梅林眼中他是壞人。
+						</p>
+					</li>
+				</ul>
+			</div>
+
+			<div class="text-xs text-gray-500 pt-2 border-t border-gray-700">
+				<p>
+					💡
+					小提示：此工具僅輔助「天黑請閉眼」階段的語音主持，遊戲過程中的發言與投票請依據實體桌遊規則進行。
+				</p>
+			</div>
+		</div>
+	</div>
+</dialog>
