@@ -1,6 +1,6 @@
 {
-	"name": "table-game",
-	"short_name": "table-game",
+	"name": "桌遊 GM",
+	"short_name": "桌遊 GM",
 	"display": "standalone",
 	"scope": "./",
 	"start_url": "./",
